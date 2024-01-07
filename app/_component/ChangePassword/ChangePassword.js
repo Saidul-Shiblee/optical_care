@@ -124,7 +124,7 @@ export default function ChangePassword({ cls }) {
                         <div className="w-[200px] sm:w-[260px]">
                             <Input
                                 className="w-[200px] sm:w-[260px] h-[43px] hover:bg-[#f1f5f9] focus:bg-[#f1f5f9]
-                    focus:border-[#B02032] focus:border-[1px] border-[1px] focus:outline-none "
+                    focus:border-[1px] border-[1px] focus:outline-none "
                                 id="oldPassword"
                                 type="password"
                                 {...register("oldPassword")}
@@ -147,7 +147,7 @@ export default function ChangePassword({ cls }) {
                         <div className="w-[200px] sm:w-[260px]">
                             <Input
                                 className="w-[200px] sm:w-[260px] h-[43px] hover:bg-[#f1f5f9] focus:bg-[#f1f5f9]
-                    focus:border-[#B02032] focus:border-[1px] border-[1px] focus:outline-none"
+                 focus:border-[1px] border-[1px] focus:outline-none"
                                 id="newPassword"
                                 type="password"
                                 {...register("newPassword")}
