@@ -6,7 +6,7 @@ import { lang } from "@/utils/lang";
 import Logo from "../../../public/logo.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Fade } from "react-reveal";
+import { Fade } from "react-awesome-reveal";
 import { toast } from "@/components/ui/use-toast";
 const Form = () => {
   const { state, handleChange, dispatch } = useFormContext();
@@ -34,22 +34,27 @@ const Form = () => {
       key: "buttonClicked",
       payload: { newValue: "next" },
     });
-    if (!state.radd.value || !state.ladd.value && state.step === 2) {
+    if ((state.radd.value || state.ladd.value) && state.step === 2) {
+      handleChange("step", state.step + 1);
+    }else if ((!state.radd.value || !state.ladd.value) && state.step != 2) {
+      handleChange("step", state.step + 1);
+    } else if(((state.radd.value || state.ladd.value) && state.step != 2)){
+        handleChange("step", state.step + 1);
+    }else {
       handleChange("step", state.step + 2);
- 
     }
-    if (state.radd.value  && state.step === 2) {
-      handleChange("step", state.step + 1);
+    // if (state.radd.value  && state.step === 2) {
+    //   handleChange("step", state.step + 1);
     
-    }
-    if (state.ladd.value  && state.step === 2) {
-      handleChange("step", state.step + 1);
+    // }
+    // if (state.ladd.value  && state.step === 2) {
+    //   handleChange("step", state.step + 1);
 
-    }
+    // }
  
   };
 
-
+console.log(state)
 
   // const prevStep = () => {
   //   if (state.step === 1) return;

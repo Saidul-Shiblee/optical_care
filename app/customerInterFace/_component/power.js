@@ -15,14 +15,14 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { generateArray } from '@/utils/generateArray'
-import { Fade } from 'react-reveal'
+import { Fade } from 'react-awesome-reveal'
 
 const Power = () => {
     const { state, handleChange, resetError } = useFormContext();
 
     return (
         <>
-            <Fade duration={2000}>
+            <Fade >
                 <div className='rounded-[20px]' >
                     <h3 className=' font-semibold px-2 py-6 text-2xl sm:text-3xl'>{lang?.[state.lang.value]?.powerDetails?.['title']}</h3>
                     <div className='flex' dir='ltr'>

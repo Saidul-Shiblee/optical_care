@@ -3,13 +3,13 @@
 import React from 'react'
 import { useFormContext } from '@/app/context/FormContext'
 import { lang } from '@/utils/lang'
-import { Fade } from 'react-reveal'
+import { Fade } from 'react-awesome-reveal'
 
 const FrameType = () => {
   const { state, handleChange } = useFormContext();
   return (
     <>
-      <Fade duration={1000}>
+      <Fade >
         <div className=' rounded-[20px] '>
           <h3 className='font-semibold px-2 py-6 text-2xl sm:text-3xl'>{lang?.[state.lang.value]?.frameType?.['title']}</h3>
            

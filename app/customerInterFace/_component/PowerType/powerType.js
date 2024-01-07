@@ -39,8 +39,8 @@ const PowerType = () => {
         </div>
         <div className="flex items-center space-x-2">
 
-          <div className="lens-item uppercase rounded-md w-[360px] sm:w-[490px]" onClick={() => handleChange('powerType', "progressive")}>
-            <input name="radio" id="radio2" type="radio" checked={state?.powerType?.value === "progressive"} />
+          <div className="lens-item uppercase rounded-md w-[360px] sm:w-[490px]" onClick={() => handleChange('powerType', "Progressive")}>
+            <input name="radio" id="radio2" type="radio" checked={state?.powerType?.value === "Progressive"} />
             <label for="radio2" className='flex gap-4'>
               <div className='flex justify-center items-center shrink-0'>
                 <Image src={progressiveGlass} className='w-10 h-10' alt='Progressive' />

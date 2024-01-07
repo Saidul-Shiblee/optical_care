@@ -61,7 +61,7 @@ export async function POST(request) {
             const left = await groups.findOne({ $and: leftEyeQueryCondition }).lean();
             const right = await groups.findOne({ $and: rightEyeQueryCondition }).lean();
 
-       
+     
 
             if(!left || !right){
                 return NextResponse.json(
@@ -77,6 +77,7 @@ export async function POST(request) {
 
             left.groupOrder > right.groupOrder ? groupRef = left._id : groupRef = right._id
 
+           
 
             let filter = {
                 $and: [
@@ -103,6 +104,14 @@ export async function POST(request) {
 
         } catch (error) {
             console.error("Error:", error.message);
+            return NextResponse.json(
+                {
+                    packages: packs,
+                    Message: "Something went wrong"
+                },
+                { status: 500 }
+            );
+           
         }
 
 
