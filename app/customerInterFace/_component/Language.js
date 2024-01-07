@@ -4,7 +4,7 @@ import { useFormContext } from '@/app/context/FormContext';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react'
-import Logo from '../../../../public/logo.png';
+import Logo from '../../../public/logo.png'
 const Language = () => {
 
     const { state, handleChange } = useFormContext();

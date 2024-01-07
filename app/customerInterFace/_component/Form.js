@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MultiStepForm from "./MultiStepForm";
 import { useFormContext } from "../../context/FormContext";
 import { lang } from "@/utils/lang";
-import Logo from "../../../public/logo.png";
+import Logo from '../../../public/logo.png'
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Fade } from "react-awesome-reveal";

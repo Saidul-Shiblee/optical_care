@@ -5,10 +5,13 @@ import { lang } from '@/utils/lang'
 
 import { Fade } from 'react-awesome-reveal'
 import Image from 'next/image'
-import clearGlass from './../../../../public/clear.png';
-import blueCutGlass from './../../../../public/bluecut.png';
-import tentedGlass from './../../../../public/tinted.png';
-import automaticGlass from './../../../../public/automatic.png';
+
+import clearGlass from '../../../public/clear.png'
+import blueCutGlass from '../../../public/bluecut.png'
+import blueCutGlass from '../../../public/bluecut.png'
+import tentedGlass from '../../../public/tinted.png'
+import automaticGlass from '../../../public/automatic.png'
+
 
 
 const LensType = () => {
