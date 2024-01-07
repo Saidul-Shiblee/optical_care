@@ -7,27 +7,27 @@ export const priceSchema = Schema(
         lenseType: {
             type:Schema.Types.ObjectId,
             ref: 'Lens',
-            required: true
+            required: [true, "Lens Type can't be left blank"]
         },
         group: {
             type: Schema.Types.ObjectId,
             ref: 'Group',
-            required: true
+            required: [true, "Group can't be left blank"]
         },
         package: {
             type: Schema.Types.ObjectId,
             ref: 'Package',
-            required: true
+            required: [true, "Package can't be left blank"]
         },
         lensePrice: {
             type: Number,
-            required: true
+            required: [true, "Lens price can't be left blank"]
         },
        
         groupIdentifier: {
             type: String,
-            required: true,
-            unique:true
+            required:true,
+            unique: [true, "This package aleady exixt"]
         },
         attributes: {
             type: String,

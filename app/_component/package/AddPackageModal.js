@@ -54,6 +54,31 @@ export default function AddPackageModal({ show, setShow, packages, setPackages, 
                     })
 
                 }
+
+                if (!res.ok && (res.status === 400 || res.status === 409)) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
+
+                }
+                if (!res.ok) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: 'Something went wrong',
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
+
+                }
                 return
             }
             const res = await fetch(`/api/package/?id=${pack?._id}`, {
@@ -80,10 +105,39 @@ export default function AddPackageModal({ show, setShow, packages, setPackages, 
                 })
 
             }
+            if (!res.ok && (res.status === 400 || res.status === 409)) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
+            if (!res.ok) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: 'Something went wrong',
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
 
 
         } catch (error) {
-            console.log(error)
+            toast({
+                title: "Error",
+                description: 'Something went wrong',
+                variant: "destructive",
+                className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+            })
         } finally {
             setLoading(false)
         }

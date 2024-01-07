@@ -18,13 +18,32 @@ import Logo from '../public/logo.png'
 import Image from "next/image"
 import { signOut } from "next-auth/react"
 import processNumber from "@/utils/processNumber"
+import ChangePassword from "./_component/ChangePassword/ChangePassword"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+import { FaBars } from "react-icons/fa6";
 
 
 export default function Home() {
 
+  const [browser,setBrowser]=useState(false)
+
+  useEffect(()=>{
+    setBrowser(true)
+  },[])
+
   const {data:session} = useSession()
   const router=useRouter()
 
+
+  
 
 
   const handleLogout=()=>{
@@ -48,6 +67,8 @@ export default function Home() {
   const [pack, setPack] = useState(null)
   const [lens, setLens] = useState(null)
   const [price, setPrice] = useState(null)
+
+  
 
   useEffect(()=>{
     if (!showAddGroupModal){
@@ -149,37 +170,82 @@ export default function Home() {
   }
 
 
-  if (!session) {
-   return null
+  if (browser && !session){
+    router.replace('/login')
   }
+ 
 
   return (
 
 
-    <div className="flex w-full">
-      <div className="flex bg-black w-[20%]  py-20 flex-col text-white fixed h-screen">
+    <div className="flex w-full flex-col lg:flex-row">
+      <div className=" bg-black w-[20%] hidden lg:flex  py-20 flex-col text-white fixed h-screen">
 
         <div className="flex flex-col justify-center items-center space-x-2">
           <div className='w-12 h-12 relative overflow-hidden'>
             <Image src={Logo} alt="logo" fill className='absolute rounded-full ' />
           </div>
           <p> Hello! Admin</p>
-          <p className="text-sm">{session.user.email}</p>  
+          <p className="text-sm">{session?.user?.email}</p>  
          
         </div>
         <div className="py-10 ">
           <p className="w-full py-2 text-black text-center bg-white font-semibold cursor-pointer">Dashboard</p>
         </div>
-        <div className="mt-auto flex justify-center">
+        <div className="mt-auto flex justify-center gap-4">
           <p onClick={() => handleLogout()} className=" cursor-pointer">Logout</p>  
+          <ChangePassword cls='bg-black border-none  hover:bg-black hover:text-white px-0 py-0 -mt-2'/>
         </div>
         
 
 
       </div>
-      <div className="flex min-h-screen flex-col gap-4 p-24 items-start w-[80%] ml-[20%]">
+    
+        <Sheet >
+          <SheetTrigger asChild>
+            <Button className="block lg:hidden p-4" variant="hamBurgerButton" size={'hamBurgerButton'}>
+              <FaBars className="block h-6 w-6 " />
+            </Button>
+          </SheetTrigger>
+          <SheetContent className='overflow-y-auto'>
+            <SheetHeader>
+
+              <div className="flex flex-col space-y-1 mt-4 mb-2 justify-center items-center">
+                <div className='w-12 h-12 relative overflow-hidden'>
+                  <Image src={Logo} alt="logo" fill className='absolute rounded-full ' />
+                </div>
+                <p> Hello! Admin</p>
+                <p className="text-sm">{session?.user?.email}</p>
+              </div>
+            </SheetHeader>
+
+            <div className="py-10 ">
+              <p className="w-full py-2 text-black text-center bg-white font-semibold cursor-pointer">Dashboard</p>
+            </div>
+
+
+
+
+
+
+            <SheetFooter>
+              <div className="mt-auto flex justify-center gap-2">
+                <p onClick={() => handleLogout()} className=" cursor-pointer text-black text-xs ">Logout</p>
+              <ChangePassword cls='bg-white border-none  hover:bg-white hover:text-black px-0 py-0 -mt-3 text-xs font-normal' />
+              </div>
+
+
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+
+   
+     
+      
+
+      <div className="flex min-h-screen flex-col gap-4 p-6 lg:p-24 items-start w-[100%] lg:w-[80%] lg:ml-[20%]">
         <div
-          className="w-full p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
+          className="w-full p-3 lg:p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
         >
           <div className="flex justify-between">
             <h3 className="text-xl font-semibold">Mange Groups</h3>
@@ -192,7 +258,7 @@ export default function Home() {
           {l1 ? <div className="flex flex-col gap-4">
             <GroupLoadingSkeleton />
             <GroupLoadingSkeleton />
-          </div> : <div className="grid grid-cols-3 gap-4">
+          </div> : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {groups.length === 0 && <div> No group added yet</div>}
             {groups.map(el => <div className="flex flex-col border p-2 rounded-md" key={el._id}>
               <div className="flex justify-between items-center"> <h6 className="text-xl font-semibold">Group-{el.groupName}</h6>
@@ -225,7 +291,7 @@ export default function Home() {
 
 
         <div
-          className="w-full p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
+          className="w-full p-3 lg:p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
         >
           <div className="flex justify-between">
             <h3 className="text-xl font-semibold">Manage Package</h3>
@@ -238,7 +304,7 @@ export default function Home() {
           {l2 ? <div className="flex flex-col gap-4">
             <PackageLoadingSkeleton />
 
-          </div> : <div className="grid grid-cols-3 gap-4">
+          </div> : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {packages.length === 0 && <div> No group added yet</div>}
             {packages.map(el => <div className="flex flex-col border p-2 rounded-md" key={el._id}>
               <div className="flex justify-between items-center"> <h6 className="text-xl font-semibold">{el?.packageName}</h6>
@@ -265,7 +331,7 @@ export default function Home() {
 
 
         <div
-          className="w-full p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
+          className="w-full p-3 lg:p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
         >
           <div className="flex justify-between">
             <h3 className="text-xl font-semibold">Manage Lens</h3>
@@ -278,7 +344,7 @@ export default function Home() {
           {l3 ? <div className="flex flex-col gap-4">
             <PackageLoadingSkeleton />
 
-          </div> : <div className="grid grid-cols-3 gap-4">
+          </div> : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {lenses?.length === 0 && <div> No lens added yet</div>}
             {lenses?.map(el => <div className="flex flex-col border p-2 rounded-md" key={el._id}>
               <div className="flex justify-between items-center"> <h6 className="text-xl font-semibold">{el?.lensName}</h6>
@@ -303,7 +369,7 @@ export default function Home() {
 
         </div>
         <div
-          className="w-full p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
+          className="w-full p-3 lg:p-8  flex flex-col border border-1 rounded-md gap-4 shadow"
         >
           <div className="flex justify-between">
             <h3 className="text-xl font-semibold">Manage Price</h3>
@@ -316,7 +382,7 @@ export default function Home() {
           {l4 ? <div className="flex flex-col gap-4">
             <GroupLoadingSkeleton />
             <GroupLoadingSkeleton />
-          </div> : <div className="grid grid-cols-3 gap-4">
+          </div> : <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             {prices.length === 0 && <div> No price added yet</div>}
             {prices.map(el => <div className="flex flex-col border p-2 rounded-md" key={el._id}>
               <div className="flex justify-between items-center"> <h6 className="text-xl font-semibold">{el?.groupIdentifier}</h6>

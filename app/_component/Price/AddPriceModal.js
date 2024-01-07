@@ -40,7 +40,7 @@ export default function AddPriceModal({ show,
     const [remarks, setRemarks] = useState("")
     const [loading, setLoading] = useState("")
 
-        console.log(price)
+       
     useEffect(() => {
         setGroupsName(price?.group?._id+ "-" +price?.group?.groupName || "")
         setLensesName(price?.lenseType?._id + "-" +price?.lenseType?.lensName || "")
@@ -62,12 +62,12 @@ export default function AddPriceModal({ show,
         groupIdentifier: groupsName?.split("-")[1] + "_" + lensesName?.split("-")[1] + "_" +packagesName?.split("-")[1] ,
         attributes:attributes,
         rimlessAvailable: rimlessAvailable,
-        ...(!rimlessAvailable ?{remarks: remarks}:{}),
-        ...(rimlessAvailable ? { rimlessAttributes: rimlessAttributes } : {}),
-        ...(rimlessAvailable ? { rimlessPrice: rimlessFramePrice } : {})
+        ...(!rimlessAvailable ? { remarks: remarks } : { remarks :""}),
+        ...(rimlessAvailable ? { rimlessAttributes: rimlessAttributes } : { rimlessAttributes:"" }),
+        ...(rimlessAvailable ? { rimlessPrice: rimlessFramePrice } : { rimlessPrice :""})
     }
 
-console.log(data)
+
 
     const resetForm = () => {
         setGroupsName("")
@@ -105,6 +105,31 @@ console.log(data)
                         })
                     }
                 }
+
+                if (!res.ok && (res.status === 400 || res.status === 409)) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
+
+                }
+                if (!res.ok) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: 'Something went wrong',
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
+
+                }
                 return
             }
             const res = await fetch(`/api/price/?id=${price?._id}`, {
@@ -116,7 +141,6 @@ console.log(data)
 
             if (res.ok) {
                 setPrices(pv => pv.map(el => {
-                    console.log(result)
                     if (el._id === result?.data?._id) {
                         return result.data
                     }
@@ -132,10 +156,39 @@ console.log(data)
                 })
 
             }
+            if (!res.ok && (res.status === 400 || res.status === 409)) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
+            if (!res.ok) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: 'Something went wrong',
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
 
 
         } catch (error) {
-            console.log(error)
+            toast({
+                title: "Error",
+                description: 'Something went wrong',
+                variant: "destructive",
+                className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+            })
         } finally {
             setLoading(false)
         }
@@ -164,7 +217,7 @@ console.log(data)
 
                                 {
                                     lenses.map(el=>{
-                                        return <SelectItem value={el?._id + "-" + el?.lensName}>{el?.lensName}</SelectItem>
+                                        return <SelectItem key={el?._id} value={el?._id + "-" + el?.lensName}>{el?.lensName}</SelectItem>
                                     })
                                 }
                                 
@@ -184,7 +237,7 @@ console.log(data)
 
                                     {
                                         groups.map(el => {
-                                            return <SelectItem value={el?._id + "-" + el?.groupName}>{el?.groupName}</SelectItem>
+                                            return <SelectItem key={el?._id} value={el?._id + "-" + el?.groupName}>{el?.groupName}</SelectItem>
                                         })
                                     }
 
@@ -202,7 +255,7 @@ console.log(data)
                             <SelectContent >
                                 {
                                     packages.map(el => {
-                                        return <SelectItem value={el?._id + "-" + el?.packageName}>{el?.packageName}</SelectItem>
+                                        return <SelectItem key={el?._id} value={el?._id + "-" + el?.packageName}>{el?.packageName}</SelectItem>
                                     })
                                 }
 

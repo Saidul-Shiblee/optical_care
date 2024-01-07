@@ -41,7 +41,7 @@ export default function AddGroupModal({ show, setShow, groups, setGroups, group 
     const [loading, setLoading] = useState(false)
 
 
-    console.log(processNumber(group?.cylindricalUpperLimit)[1])
+
 
     useEffect(() => {
         setGroupName(group?.groupName || "")
@@ -101,7 +101,7 @@ export default function AddGroupModal({ show, setShow, groups, setGroups, group 
                     cache: 'no-store'
                 })
                 const result = await res.json()
-                console.log(result)
+                console.log(res)
                 if (res.ok) {
                     setGroups(pv => [...pv, result.data])
                     resetForm()
@@ -112,6 +112,30 @@ export default function AddGroupModal({ show, setShow, groups, setGroups, group 
                         variant: "success",
                         className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
                     })
+
+                }
+                if (!res.ok && (res.status === 400 || res.status === 409)) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
+
+                }
+                if (!res.ok ) {
+                    resetForm()
+                    setShow(false)
+                    toast({
+                        title: "Error",
+                        description: 'Something went wrong',
+                        variant: "destructive",
+                        className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                    })
+                    return
 
                 }
                 return
@@ -140,10 +164,39 @@ export default function AddGroupModal({ show, setShow, groups, setGroups, group 
                 })
 
             }
+            if (!res.ok && (res.status === 400 || res.status === 409)) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: Array.isArray(result.message) ? result.message.map((el, index) => <p key={index}>{el}</p>) : result.message,
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
+            if (!res.ok) {
+                resetForm()
+                setShow(false)
+                toast({
+                    title: "Error",
+                    description: 'Something went wrong',
+                    variant: "destructive",
+                    className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+                })
+                return
+
+            }
 
 
         } catch (error) {
-            console.log(error)
+            toast({
+                title: "Error",
+                description: 'Something went wrong',
+                variant: "destructive",
+                className: 'top-0 right-0 flex fixed md:max-w-[300px] md:top-4 md:right-4'
+            })
         } finally {
             setLoading(false)
         }

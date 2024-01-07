@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/monogConnect";
 const { ObjectId } = require("mongodb");
 import { create, findAll, findAndDelete, findAndUpdate } from "@/services/groupServices";
+import mongoose from "mongoose";
 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -17,13 +18,30 @@ export async function POST(request) {
             { status: 200 }
         );
     } catch (error) {
-        console.log(error)
-        return NextResponse.json(
-            {
-                message: `Something went wrong`,
-            },
-            { status: 500 }
-        );
+        if (error instanceof mongoose.Error.ValidationError) {
+            return NextResponse.json(
+                {
+                    message: Object.values(error.errors).map(val => val.message),
+                },
+                { status: 400 }
+            );
+        } else if (error.name === "MongoError" && error.code === 11000) {
+            return NextResponse.json(
+                {
+                    message: `Duplicate record found`,
+                },
+                { status: 409 }
+            );
+        }
+        else {
+            return NextResponse.json(
+                {
+                    message: `Something went wrong`,
+                },
+                { status: 500 }
+            );
+
+        }
 
     }
 }
@@ -45,14 +63,30 @@ export async function PUT(request) {
         );
 
     } catch (error) {
-        console.log(error)
-        return NextResponse.json(
-            {
-                message: `Something went wrong`,
-            },
-            { status: 500 }
-        );
+        if (error instanceof mongoose.Error.ValidationError) {
+            return NextResponse.json(
+                {
+                    message: Object.values(error.errors).map(val => val.message),
+                },
+                { status: 400 }
+            );
+        } else if (error.name === "MongoError" && error.code === 11000) {
+            return NextResponse.json(
+                {
+                    message: `Duplicate record found`,
+                },
+                { status: 409 }
+            );
+        }
+        else {
+            return NextResponse.json(
+                {
+                    message: `Something went wrong`,
+                },
+                { status: 500 }
+            );
 
+        }
     }
 }
 

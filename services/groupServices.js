@@ -11,6 +11,11 @@ export const findAll = async (filter, modelName) => {
     const foundDocuments = await model.find(filter).lean();
     return foundDocuments;
 }
+export const find = async (filter, modelName) => {
+    const model = (await import(`../models/${modelName}`)).default;
+    const foundDocument = await model.findOne(filter).lean();
+    return foundDocument;
+}
 
 //Update Document
 export const findAndUpdate = async (id, update, modelName) => {

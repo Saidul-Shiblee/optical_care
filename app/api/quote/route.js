@@ -23,15 +23,7 @@ export async function POST(request) {
         powerType
     }=state
 
-    console.log(leftEyeSpherical,
-        leftEyeCylindrical,
-        leftEyeAdditional,
-        rightEyeSpherical,
-        rightEyeCylindrical,
-        rightEyeAdditional,
-        lensType,
-        frameType,
-        powerType)
+ 
 
 
         try {
@@ -69,8 +61,7 @@ export async function POST(request) {
             const left = await groups.findOne({ $and: leftEyeQueryCondition }).lean();
             const right = await groups.findOne({ $and: rightEyeQueryCondition }).lean();
 
-
-            console.log('jkjkj',left,right)
+       
 
             if(!left || !right){
                 return NextResponse.json(

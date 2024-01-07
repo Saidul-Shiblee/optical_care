@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Logo from '../../public/logo.png'
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 
@@ -16,10 +16,15 @@ export default Login;
 function Login() {
 
 const router=useRouter()
-
+const { data: session } = useSession()
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
 const [loading, setLoading] = useState(false)
+const [browser, setBrowser] = useState(false)
+
+  useEffect(() => {
+    setBrowser(true)
+  }, [])
 
 
   const handleSignin = async (e) => {
@@ -52,6 +57,13 @@ const [loading, setLoading] = useState(false)
       setLoading(false)
     }
   };
+
+
+
+  if (browser && session) {
+    router.replace('/')
+  }
+
 
     return (
         <section class=" w-full h-screen flex justify-center items-center">

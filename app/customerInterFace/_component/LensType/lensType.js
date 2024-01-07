@@ -1,7 +1,7 @@
 import { getLensTypes } from '@/lib/fetchData'
 
 import React from 'react'
-import Lens from './lens'
+import Lens from './Lens'
 
 const LensType = () => {
 

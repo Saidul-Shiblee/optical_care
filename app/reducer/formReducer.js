@@ -35,9 +35,12 @@ export const FormReducer = (state, { key, payload }) => {
     case "step":
       state.step = payload.newValue;
       return;
+    case "result":
+      state.result = payload.newValue;
+      return;
     case "loading":
-        state.loading=payload.newValue  
+      state.loading = payload.newValue
     case "buttonClicked":
-        state.buttonClicked=payload.newValue  
+      state.buttonClicked = payload.newValue
   }
 };

@@ -11,7 +11,7 @@ export const groupSchema = new mongoose.Schema(
         },
         groupOrder:{
             type:Number,
-            required:true,
+            required: [true, "Group Order can't be left blank"],
             unique: true,
         },
         sphericalLowerLimit: {

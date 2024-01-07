@@ -5,7 +5,7 @@ export const DEFAULT_STATE = {
   },
   rs: {
     value: "",
-    error:'',
+    error: '',
     step: 2,
   },
   ls: {
@@ -43,6 +43,7 @@ export const DEFAULT_STATE = {
   },
   step: 1,
   loading: false,
-  
+  result: false,
+
   buttonClicked: "next",
 };

@@ -1,6 +1,6 @@
 const VALIDATION_FUNCTIONS = {
   required(val, errMsg) {
-    return !!val ? null : errMsg;
+    return val ? null : errMsg;
   }
 };
 
