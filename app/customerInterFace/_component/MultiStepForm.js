@@ -3,7 +3,7 @@
 
 import React from "react";
 import { useFormContext } from "../../context/FormContext";
-import Power from "./Power";
+import Power from "./Power.js";
 import LensType from "./LensType";
 import Language from "./Language";
 import PowerType from "./PowerType";

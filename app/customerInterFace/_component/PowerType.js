@@ -5,7 +5,7 @@ import { useFormContext } from '@/app/context/FormContext'
 import Image from 'next/image'
 import { lang } from '@/utils/lang'
 import BifocalGlass from "../../../public/bifocal.png";
-import progressiveGlass from "../../../publicprogressive.png";
+import progressiveGlass from "../../../public/progressive.png";
 
 const PowerType = () => {
     const { state, handleChange } = useFormContext();
