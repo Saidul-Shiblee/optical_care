@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react'
 import Logo from '../../../../public/logo.png';
-const Langaguage = () => {
+const Language = () => {
 
     const { state, handleChange } = useFormContext();
 
@@ -36,4 +36,4 @@ const Langaguage = () => {
     )
 }
 
-export default Langaguage
+export default Language

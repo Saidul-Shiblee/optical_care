@@ -3,17 +3,17 @@
 
 import React from "react";
 import { useFormContext } from "../../context/FormContext";
-import Power from "./power";
-import LensType from "./LensType/LensType";
-import Langaguage from "./Langugage/langaguage";
-import PowerType from "./PowerType/powerType";
-import FrameType from "./FrameType/frameType";
+import Power from "./Power";
+import LensType from "./LensType";
+import Language from "./Language";
+import PowerType from "./PowerType";
+import FrameType from "./FrameType";
 
 const MultiStepForm = () => {
   const { state } = useFormContext();
   return (
     <div dir={state.lang.value === "ar" ? 'rtl' : 'ltr'} id="animated" className={` flex justify-end items-center`}>
-      {state.step === 1 && <Langaguage />}
+      {state.step === 1 && <Language />}
       {state.step === 2 && <Power />}
       {state.step === 3 && <PowerType />}
       {state.step === 4 && <LensType />}
