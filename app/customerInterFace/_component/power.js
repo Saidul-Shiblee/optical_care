@@ -17,7 +17,7 @@ import {
 import { generateArray } from '@/utils/generateArray'
 import { Fade } from 'react-awesome-reveal'
 
-const Power = () => {
+export default function Power {
     const { state, handleChange, resetError } = useFormContext();
 
     return (
@@ -159,5 +159,3 @@ const Power = () => {
         </>
     )
 }
-
-export default Power
