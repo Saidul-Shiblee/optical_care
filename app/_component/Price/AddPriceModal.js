@@ -1,5 +1,5 @@
 
-import { Button } from "@/components/ui/button"
+import { Button } from "../../../components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -7,17 +7,17 @@ import {
     DialogHeader,
     DialogTitle,
 
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/Input"
-import { Label } from "@/components/ui/Label"
+} from "../../../components/ui/dialog"
+import { Input } from "../../../components/ui/Input"
+import { Label } from "../../../components/ui/Label"
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
-import { toast } from "@/components/ui/use-toast"
+} from "../../../components/ui/select"
+import { toast } from "../../../components/ui/use-toast"
 
 import { useEffect, useState } from "react"
 
