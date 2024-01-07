@@ -4,10 +4,10 @@
 import React from "react";
 import { useFormContext } from "../../context/FormContext";
 import Power from "./power";
-import LensType from "../_component/LensType/LensType";
-import Langaguage from "../_component/Langugage/langaguage";
-import PowerType from "../_component/PowerType/powerType";
-import FrameType from "../_component/FrameType/frameType";
+import LensType from "./LensType/LensType";
+import Langaguage from "./Langugage/langaguage";
+import PowerType from "./PowerType/powerType";
+import FrameType from "./FrameType/frameType";
 
 const MultiStepForm = () => {
   const { state } = useFormContext();
