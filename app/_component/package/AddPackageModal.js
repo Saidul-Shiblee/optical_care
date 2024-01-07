@@ -1,5 +1,5 @@
 
-import { Button } from "../../../components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -7,10 +7,10 @@ import {
     DialogHeader,
     DialogTitle,
 
-} from "../../../components/ui/dialog"
-import { Input } from "../../../components/ui/Input"
-import { Label } from "../../../components/ui/Label"
-import { toast } from "../../../components/ui/use-toast"
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/Input"
+import { Label } from "@/components/ui/Label"
+import { toast } from "@/components/ui/use-toast"
 import { useEffect, useState } from "react"
 // show = { showAddPackageModal } setShow = { setShowAddPackageModal } packages = { packages } setPackages = { setPackages } pack = { pack }
 

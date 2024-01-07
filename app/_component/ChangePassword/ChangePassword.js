@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "../../../components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -9,14 +9,14 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "../../../components/ui/dialog"
-import { Input } from "../../../components/ui/input"
-import { Label } from "../../../components/ui/label"
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react"
 import Joi from "joi"
 import { useForm } from "react-hook-form"
 import { joiResolver } from "@hookform/resolvers/joi"
-import { toast } from "../../../components/ui/use-toast"
+import { toast } from "@/components/ui/use-toast"
 import { signOut, useSession } from "next-auth/react"
 
 
